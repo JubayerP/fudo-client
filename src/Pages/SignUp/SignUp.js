@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
+import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
+    const { createUser } = useContext(AuthContext);
+
     const [userInfo, setUserInfo] = useState({
         name: '',
         url: '',
@@ -12,11 +15,11 @@ const SignUp = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const email = userInfo.email
-        const password = userInfo.password
-
-        const user = { email, password }
-        console.log(user);
+        createUser(userInfo.email, userInfo.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+        })
     }
 
     const handleNameChange = e => {
