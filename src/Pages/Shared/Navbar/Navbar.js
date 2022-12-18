@@ -8,7 +8,7 @@ const Navbar = () => {
         <NavLink to='/services' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Services</li></NavLink>
         <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
         <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
-        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
+        <NavLink to='/signin' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Sign In</li></NavLink>
     </>
     return (
         <div className="navbar no-animation">
@@ -31,8 +31,8 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to='/'>
-        <button className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white">Sign In</button>
+    <Link to='/signup'>
+        <button className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white">Sign Up</button>
     </Link>
   </div>
 </div>
