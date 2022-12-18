@@ -4,11 +4,11 @@ import logo from '../../../assets/logo.png';
 
 const Navbar = () => {
     const menuItems = <>
-        <NavLink to='/'><li>Home</li></NavLink>
-        <NavLink to='/services'><li>Services</li></NavLink>
-        <NavLink to='/'><li>Home</li></NavLink>
-        <NavLink to='/'><li>Home</li></NavLink>
-        <NavLink to='/'><li>Home</li></NavLink>
+        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
+        <NavLink to='/services' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Services</li></NavLink>
+        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
+        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
+        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
     </>
     return (
         <div className="navbar no-animation">
