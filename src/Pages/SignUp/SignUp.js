@@ -12,6 +12,10 @@ const SignUp = () => {
         email: '',
         password: ''
     })
+    const [errors, setErrors] = useState({
+        email: '',
+        password: ''
+    })
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -34,11 +38,32 @@ const SignUp = () => {
 
     const handleEmailChange = e => {
         const email = e.target.value;
-        setUserInfo({ ...userInfo, email: email })
+        if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+            setErrors({...errors, email: 'Please Provide a Valid Email!'})
+            setUserInfo({ ...userInfo, email: email })
+        } else {
+            setErrors({ ...errors, email: '' })
+            setUserInfo({ ...userInfo, email: email })
+        }
     }
     const handlePasswordChange = e => {
         const password = e.target.value;
-        setUserInfo({ ...userInfo, password: password })
+        if (!/(?=.*?[A-Z])/.test(password)) {
+            setErrors({ ...errors, password: 'At Least One Upper Case' })
+            setUserInfo({ ...userInfo, password: password })
+        }
+        else if (!/(?=.*?[0-9])/.test(password)) {
+            setErrors({ ...errors, password: 'At Least One Digit' })
+            setUserInfo({ ...userInfo, password: password })
+        }
+        else if (!/.{8,}/.test(password)) {
+            setErrors({...errors, password: 'Minimum eight characters'})
+            setUserInfo({ ...userInfo, password: password })
+        }
+        else {
+            setErrors({ ...errors, password: '' });
+            setUserInfo({ ...userInfo, password: password })
+        }
     }
     return (
         <div className='container mx-auto my-10 flex justify-around items-center'>
@@ -50,10 +75,12 @@ const SignUp = () => {
                     <div className='max-w-md'>
                         <input type="text" placeholder="Full Name" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary block" onChange={handleNameChange} defaultValue={userInfo.name} />
                         <input type="text" placeholder="Photo URL" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleUrlChange} defaultValue={userInfo.url} />
-                        <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleEmailChange} defaultValue={userInfo.email} />
-                        <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handlePasswordChange} defaultValue={userInfo.password} />
+                        <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-0 text-secondary" onChange={handleEmailChange} defaultValue={userInfo.email} />
+                        <p className='text-red-500 mb-5 ml-2'>{errors.email}</p>
+                        <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full text-secondary" onChange={handlePasswordChange} defaultValue={userInfo.password} />
+                        <p className='text-red-500 mb-5 ml-2'>{errors.password}</p>
                     </div>
-                    <button className="btn bg-primary hover:bg-primary border-0 px-20 rounded-full text-white capitalize no-animation">Sign In</button>
+                    <button className="btn bg-primary hover:bg-primary border-0 px-20 rounded-full text-white capitalize no-animation">Sign Up</button>
 
                     <p className='text-secondary font-semibold text-lg mt-5'>Already Have an Account? <Link className='text-primary hover:underline' to='/signin'>
                     Sign In
