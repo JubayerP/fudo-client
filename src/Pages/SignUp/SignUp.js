@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUsersProfile } = useContext(AuthContext);
 
     const [userInfo, setUserInfo] = useState({
         name: '',
@@ -23,46 +24,59 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setUserInfo({})
+                toast.success('Hurrah!, You Are In!', {
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff'
+                    }
+                })
+                updateUsersProfile(userInfo.name, userInfo.url)
+                .then(result => {
+                    // User Updated
+                })
+                .catch(e => console.log(e))
         })
     }
 
     const handleNameChange = e => {
         const name = e.target.value;
-        setUserInfo({...userInfo, name: name})
+        setUserInfo({...userInfo, name: e.target.value})
     }
 
     const handleUrlChange = e => {
         const url = e.target.value;
-        setUserInfo({...userInfo, url: url})
+        setUserInfo({...userInfo, url: e.target.value})
     }
 
     const handleEmailChange = e => {
         const email = e.target.value;
         if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
             setErrors({...errors, email: 'Please Provide a Valid Email!'})
-            setUserInfo({ ...userInfo, email: email })
+            setUserInfo({ ...userInfo, email: e.target.value })
         } else {
             setErrors({ ...errors, email: '' })
-            setUserInfo({ ...userInfo, email: email })
+            setUserInfo({ ...userInfo, email: e.target.value })
         }
     }
     const handlePasswordChange = e => {
         const password = e.target.value;
         if (!/(?=.*?[A-Z])/.test(password)) {
             setErrors({ ...errors, password: 'At Least One Upper Case' })
-            setUserInfo({ ...userInfo, password: password })
+            setUserInfo({ ...userInfo, password: e.target.value })
         }
         else if (!/(?=.*?[0-9])/.test(password)) {
             setErrors({ ...errors, password: 'At Least One Digit' })
-            setUserInfo({ ...userInfo, password: password })
+            setUserInfo({ ...userInfo, password: e.target.value })
         }
         else if (!/.{8,}/.test(password)) {
             setErrors({...errors, password: 'Minimum eight characters'})
-            setUserInfo({ ...userInfo, password: password })
+            setUserInfo({ ...userInfo, password: e.target.value })
         }
         else {
             setErrors({ ...errors, password: '' });
-            setUserInfo({ ...userInfo, password: password })
+            setUserInfo({ ...userInfo, password: e.target.value })
         }
     }
     return (
@@ -80,7 +94,7 @@ const SignUp = () => {
                         <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full text-secondary" onChange={handlePasswordChange} defaultValue={userInfo.password} />
                         <p className='text-red-500 mb-5 ml-2'>{errors.password}</p>
                     </div>
-                    <button className="btn bg-primary hover:bg-primary border-0 px-20 rounded-full text-white capitalize no-animation">Sign Up</button>
+                    <button type='submit' className="btn bg-primary hover:bg-primary border-0 px-20 rounded-full text-white capitalize no-animation">Sign Up</button>
 
                     <p className='text-secondary font-semibold text-lg mt-5'>Already Have an Account? <Link className='text-primary hover:underline' to='/signin'>
                     Sign In
