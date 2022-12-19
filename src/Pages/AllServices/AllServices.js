@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import useTitle from '../../hooks/useTitle';
 import Spinner from '../Shared/Spinner/Spinner';
 import AllService from './AllService';
 
 const AllServices = () => {
+    useTitle('Services')
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {

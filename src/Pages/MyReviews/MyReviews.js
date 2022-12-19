@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import Spinner from '../Shared/Spinner/Spinner';
 import MyReview from './MyReview';
 
@@ -8,6 +9,7 @@ const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
     const [loading, setLoading] = useState(false)
+    useTitle('My Reviews')
     useEffect(() => {
         setLoading(true)
         const url = `http://localhost:5000/reviews?email=${user?.email}`;
