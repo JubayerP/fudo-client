@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
 import { AuthContext } from '../../context/AuthProvider';
@@ -8,16 +9,40 @@ const SignIn = () => {
         email: '',
         password: ''
     });
+    console.log(userInfo);
 
-    // const { user } = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
 
     const handleSubmit = e => {
         e.preventDefault();
         const email = userInfo.email
         const password = userInfo.password
 
-        const user = { email, password }
-        console.log(user);
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                setUserInfo({
+                    email: '',
+                    password: '',
+                })
+                console.log(user)
+                toast.success('Hurrah!, You Are Logged In!', {
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff'
+                    }
+                })
+            })
+            .catch(e => {
+                toast.error(e.message, {
+                    style: {
+                        borderRadius: '10px',
+                        background: '#ED4337',
+                        color: '#fff'
+                    }
+                })
+        })
     }
 
     const handleEmailChange = e => {
@@ -39,8 +64,8 @@ const SignIn = () => {
 
                 <form onSubmit={handleSubmit} className='w-full'>
                     <div>
-                        <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleEmailChange} defaultValue={userInfo.email} />
-                        <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handlePasswordChange} defaultValue={userInfo.password} />
+                        <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleEmailChange} value={userInfo.email} />
+                        <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handlePasswordChange} value={userInfo.password} />
                     </div>
                     <button className="btn bg-primary hover:bg-primary border-0 px-20 rounded-full text-white capitalize no-animation">Sign In</button>
 

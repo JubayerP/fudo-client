@@ -24,7 +24,11 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setUserInfo({})
+                setUserInfo({
+                name: '',
+                url: '',
+                email: '',
+                password: ''})
                 toast.success('Hurrah!, You Are In!', {
                     style: {
                         borderRadius: '10px',
@@ -37,6 +41,9 @@ const SignUp = () => {
                     // User Updated
                 })
                 .catch(e => console.log(e))
+            })
+            .catch(e => {
+            console.log(e);
         })
     }
 
@@ -87,11 +94,11 @@ const SignUp = () => {
 
                 <form onSubmit={handleSubmit} className='w-full'>
                     <div className='max-w-md'>
-                        <input type="text" placeholder="Full Name" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary block" onChange={handleNameChange} defaultValue={userInfo.name} />
-                        <input type="text" placeholder="Photo URL" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleUrlChange} defaultValue={userInfo.url} />
-                        <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-0 text-secondary" onChange={handleEmailChange} defaultValue={userInfo.email} />
+                        <input type="text" placeholder="Full Name" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary block" onChange={handleNameChange} value={userInfo.name} />
+                        <input type="text" placeholder="Photo URL" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleUrlChange} value={userInfo.url} />
+                        <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-0 text-secondary" onChange={handleEmailChange} value={userInfo.email} />
                         <p className='text-red-500 mb-5 ml-2'>{errors.email}</p>
-                        <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full text-secondary" onChange={handlePasswordChange} defaultValue={userInfo.password} />
+                        <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full text-secondary" onChange={handlePasswordChange} value={userInfo.password} />
                         <p className='text-red-500 mb-5 ml-2'>{errors.password}</p>
                     </div>
                     <button type='submit' className="btn bg-primary hover:bg-primary border-0 px-20 rounded-full text-white capitalize no-animation">Sign Up</button>
