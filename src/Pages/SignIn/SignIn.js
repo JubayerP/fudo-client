@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,8 @@ const SignIn = () => {
     });
     console.log(userInfo);
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, googleProvider } = useContext(AuthContext);
+    const gProvider = new GoogleAuthProvider();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -55,6 +57,21 @@ const SignIn = () => {
     }
 
 
+    const handleGoogleSignIn = () => {
+        googleProvider(gProvider)
+        .then(result => {
+            const user = result.user;
+            toast.success('Hurrah!, You Are In!', {
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff'
+                }
+            })
+        })
+    }
+
+
 
     return (
         <div className='container mx-auto my-10 flex justify-around items-center'>
@@ -80,7 +97,7 @@ const SignIn = () => {
                     <div className='w-1/2 bg-secondary h-[1px]'></div>
                 </div>
                 <div className='text-center'>
-                    <button className="btn btn-outline hover:bg-primary border-primary text-secondary mt-10 px-20 rounded-full capitalize no-animation">Sign In With Google</button>
+                    <button onClick={handleGoogleSignIn} className="btn btn-outline hover:bg-primary border-primary text-secondary mt-10 px-20 rounded-full capitalize no-animation">Sign In With Google</button>
                 </div>
             </div>
         </div>
