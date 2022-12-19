@@ -13,7 +13,7 @@ const MyReviews = () => {
     useEffect(() => {
         setLoading(true)
 
-        const url = `http://localhost:5000/reviews?email=${user?.email}`;
+        const url = `https://food-sense-server.vercel.app/reviews?email=${user?.email}`;
         fetch(url, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('fudo-token')}`
@@ -34,7 +34,7 @@ const MyReviews = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure? You want to delete?')
         if (proceed) {
-            fetch(`http://localhost:5000/reviews/${id}`, {
+            fetch(`https://food-sense-server.vercel.app/reviews/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

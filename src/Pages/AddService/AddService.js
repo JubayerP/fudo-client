@@ -15,7 +15,7 @@ const AddService = () => {
 
         const data = { name, img, desc, ratings, price };
 
-        fetch('http://localhost:5000/Allservices', {
+        fetch('https://food-sense-server.vercel.app/Allservices', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

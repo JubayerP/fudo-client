@@ -9,7 +9,7 @@ const AllServices = () => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true)
-        fetch('http://localhost:5000/Allservices')
+        fetch('https://food-sense-server.vercel.app/Allservices')
         .then(res => res.json())
             .then(data => {
                 setServices(data)

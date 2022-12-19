@@ -1,6 +1,8 @@
 import React from 'react';
 import { RiEditBoxLine } from 'react-icons/ri';
 import { MdDeleteSweep } from 'react-icons/md';
+import { toast } from 'react-hot-toast';
+import ReviewUpdateModal from '../Modal/ReviewUpdateModal';
 
 const MyReview = ({ r,i, handleDelete }) => {
     const { displayName, serviceName, title, review, photoURL, _id } = r;
@@ -16,11 +18,14 @@ const MyReview = ({ r,i, handleDelete }) => {
                 <img src={photoURL} className='lg:w-14 lg:h-14 rounded-full' alt="" />
             </td>
             <td>
+                <label htmlFor="reviewModal">
                 <RiEditBoxLine size={25} className='cursor-pointer'/>
+                </label>
             </td>
             <td>
                 <MdDeleteSweep onClick={() => handleDelete(_id)} size={25} className='cursor-pointer'/>
             </td>
+            <ReviewUpdateModal id={_id} />
       </tr>
     );
 };

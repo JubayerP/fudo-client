@@ -15,10 +15,11 @@ const Modal = ({service}) => {
         const email = user.email;
         const serviceName = service.name;
         const serviceId = service._id;
+        const date = new Date()
 
-        const data = { title, review, displayName, photoURL, email, serviceName, serviceId };
+        const data = { title, review, displayName, photoURL, email, serviceName, serviceId, date };
         
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://food-sense-server.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

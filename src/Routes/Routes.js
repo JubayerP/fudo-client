@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
             {
                 path: '/services/:id',
                 element: <ServiceDetails />,
-                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({params}) => fetch(`https://food-sense-server.vercel.app/services/${params.id}`)
             },
             {
                 path: '/signup',

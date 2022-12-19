@@ -1,8 +1,7 @@
 import React from 'react';
 
 const ServiceReviews = ({ r }) => {
-    const { title, review, photoURL, displayName } = r;
-    console.log(r);
+    const { title, review, photoURL, displayName, date } = r;
     return (
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto rounded-md border border-primary">
             <div>
@@ -26,7 +25,7 @@ const ServiceReviews = ({ r }) => {
 			</div>
 			<div>
                         <h4 className="font-semibold text-secondary">{displayName}</h4>
-				<span className="text-xs text-secondary">2 days ago</span>
+				<span className="text-xs text-secondary">{date}</span>
 			</div>
 		</div>
 </div>

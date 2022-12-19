@@ -8,16 +8,20 @@ import ServiceReviews from './ServiceReviews';
 
 const ServiceDetails = () => {
     useTitle('Service Details')
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const service = useLoaderData();
     const { name, price, _id, img, desc, ratings } = service;
 
     const [reviews, setReviews] = useState([]);
+    console.log(reviews);
+
     const filterReviews = reviews.filter(review => review.serviceId === _id);
     
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
-            .then(res => res.json())
+        fetch('https://food-sense-server.vercel.app/reviews')
+        .then(res => {
+            return res.json()
+        })
         .then(data => setReviews(data))
     },[])
 
