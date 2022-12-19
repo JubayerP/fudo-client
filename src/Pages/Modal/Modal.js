@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider';
 
 
@@ -9,12 +10,13 @@ const Modal = ({service}) => {
         const form = e.target;
         const title = form.title.value;
         const review = form.review.value;
+        const displayName = user.displayName;
         const photoURL = user.photoURL;
         const email = user.email;
         const serviceName = service.name;
         const serviceId = service._id;
 
-        const data = { title, review, photoURL, email, serviceName, serviceId };
+        const data = { title, review, displayName, photoURL, email, serviceName, serviceId };
         
         fetch('http://localhost:5000/reviews', {
             method: 'POST',
@@ -25,7 +27,10 @@ const Modal = ({service}) => {
         })
             .then(res => res.json())
             .then(data => {
-            console.log(data);
+                console.log(data);
+                if (data.acknowledged) {
+                toast.success('You Just Reviewd Your Favorite Food!')
+            }
         })
     }
     return (

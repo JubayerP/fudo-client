@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DynamicStar } from 'react-dynamic-star';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 import Modal from '../Modal/Modal';
 import ServiceReviews from './ServiceReviews';
 
 const ServiceDetails = () => {
+    const { user } = useContext(AuthContext);
     const service = useLoaderData();
     const { name, price, _id, img, desc, ratings } = service;
 
@@ -32,15 +34,27 @@ const ServiceDetails = () => {
                     <h4 className='text-2xl font-bold text-primary'>Price ${price}</h4>
                 </div>
             </div>
-            <div className=''>
+            { user ?
+                
+                <div className=''>
                 <label htmlFor="my-modal-3" className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Add Your Review</label>
                 
-                <div>
+                <div className={`${filterReviews.length > 3 ? 'overflow-y-scroll' : 'overflow-hidden'} my-10 space-y-6 h-screen px-2`}>
                     {
                         filterReviews.map(r => <ServiceReviews key={r._id} r={ r} />)
                     }
                 </div>
-            </div>
+                </div>
+                    
+                :
+
+                <div className='text-center'>
+                    <h3 className="text-2xl font-bold text-secondary mb-10">Want to add a review? Sign In now</h3>
+                    <Link to='/signin'>
+                    <button className='btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation'>Sign In Now</button>
+                    </Link>
+                </div>
+        }
             <Modal service={service} />
         </div>
     );

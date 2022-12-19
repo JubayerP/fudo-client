@@ -8,9 +8,11 @@ const Navbar = () => {
     const menuItems = <>
         <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
         <NavLink to='/services' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Services</li></NavLink>
-        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
-        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Home</li></NavLink>
-        { user?.uid ? undefined :<NavLink to='/signin' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Sign In</li></NavLink>}
+        
+      {user?.uid ? <>
+        <NavLink to='/myreviews' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>My Reviews</li></NavLink>
+        <NavLink to='/addservice' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Add Service</li></NavLink>
+      </> : <NavLink to='/signin' className={({ isActive }) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Sign In</li></NavLink>}
     </>
     return (
         <div className="navbar no-animation">
