@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DynamicStar } from 'react-dynamic-star';
 import { useLoaderData } from 'react-router-dom';
+import Modal from '../Modal/Modal';
+import ServiceReviews from './ServiceReviews';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
     const { name, price, _id, img, desc, ratings } = service;
+
+    const [reviews, setReviews] = useState([]);
+    const filterReviews = reviews.filter(review => review.serviceId === _id);
+    
+    useEffect(() => {
+        fetch('http://localhost:5000/reviews')
+            .then(res => res.json())
+        .then(data => setReviews(data))
+    },[])
+
     return (
         <div className='container mx-auto grid grid-cols-3 gap-4 my-20'>
             <div className='col-span-2'>
@@ -21,8 +33,15 @@ const ServiceDetails = () => {
                 </div>
             </div>
             <div className=''>
+                <label htmlFor="my-modal-3" className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Add Your Review</label>
                 
+                <div>
+                    {
+                        filterReviews.map(r => <ServiceReviews key={r._id} r={ r} />)
+                    }
+                </div>
             </div>
+            <Modal service={service} />
         </div>
     );
 };

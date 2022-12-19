@@ -10,7 +10,6 @@ const SignIn = () => {
         email: '',
         password: ''
     });
-    console.log(userInfo);
 
     const { signIn, googleProvider } = useContext(AuthContext);
     const gProvider = new GoogleAuthProvider();
