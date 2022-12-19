@@ -2,7 +2,7 @@ import React from 'react';
 import banner from '../../../assets/banner/banner.jpg';
 const Banner = () => {
     return (
-        <div className='flex lg:flex-row flex-col gap-10 lg:py-0 py-20 container mx-auto items-center h-screen'>
+        <div className='flex lg:flex-row flex-col gap-10 lg:py-0 py-20 container mx-auto items-center lg:h-screen h-full'>
             <div className='mb-10 lg:mb-0'>
                 <h1 className="lg:text-7xl text-5xl font-bold text-secondary lg:leading-[100px] leading-[70px]">
                 Order Your Food & Enjoy The Taste

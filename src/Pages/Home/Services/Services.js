@@ -16,7 +16,7 @@ const Services = () => {
             Delicious Services For You
             </h2>
 
-            <div className='container mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1'>
+            <div className='container mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10'>
                 {
                     services.map(service => <Service key={service._id} service={service} />)
                 }

@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../Shared/Spinner/Spinner';
 import AllService from './AllService';
 
 const AllServices = () => {
     const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true)
         fetch('http://localhost:5000/Allservices')
         .then(res => res.json())
-        .then(data => setServices(data))
+            .then(data => {
+                setServices(data)
+                setLoading(false)
+        })
     }, [])
     return (
         <div className='container mx-auto my-20'>
-            <h2 className="text-5xl font-bold text-primary mb-10">
+            {
+                loading 
+                    ?
+                    <Spinner />
+                    :
+                
+                <>
+                <h2 className="text-5xl font-bold text-primary mb-10">
             Delicious Services For You
             </h2>
 
@@ -19,6 +32,7 @@ const AllServices = () => {
                     services.map(service => <AllService key={service._id} service={service} />)
                 }
             </div>
+            </>}
         </div>
     );
 };

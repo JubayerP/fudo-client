@@ -29,9 +29,9 @@ const AddService = () => {
     }
     return (
         <div>
-            <h2 className="text-5xl font-semibold text-center text-secondary">Add Your Food Service</h2>
+            <h2 className="text-5xl font-semibold text-center text-secondary mt-10">Add Your Food Service</h2>
 
-            <form onSubmit={handleSubmit} className='max-w-3xl mx-auto my-10'>
+            <form onSubmit={handleSubmit} className='lg:max-w-3xl max-w-md mx-auto my-10'>
                 <div className='grid lg:grid-cols-2 gap-4'>
                 <input type="text" placeholder="Service Name" name='name' className="input focus:outline-none bg-slate-200 text-secondary w-full" />
                 <input type="text" placeholder="PhotoURL" name='img' className="input focus:outline-none bg-slate-200 text-secondary w-full" />

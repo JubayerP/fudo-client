@@ -1,7 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 
@@ -10,6 +10,10 @@ const SignIn = () => {
         email: '',
         password: ''
     });
+
+    const location = useLocation()
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     const { signIn, googleProvider } = useContext(AuthContext);
     const gProvider = new GoogleAuthProvider();
@@ -34,6 +38,7 @@ const SignIn = () => {
                         color: '#fff'
                     }
                 })
+                navigate(from, { replace: true })
             })
             .catch(e => {
                 toast.error(e.message, {
@@ -67,14 +72,15 @@ const SignIn = () => {
                     color: '#fff'
                 }
             })
+            navigate(from, {replace: true})
         })
     }
 
 
 
     return (
-        <div className='container mx-auto my-10 flex justify-around items-center'>
-            <img src={login} className='w-1/3 rounded-2xl' alt="" />
+        <div className='container mx-auto my-10 flex lg:flex-row flex-col justify-around items-center lg:space-y-0 space-y-10'>
+            <img src={login} className='lg:w-1/3 object-cover w-4/5 rounded-2xl' alt="" />
             <div>
                 <h1 className="text-6xl font-bold text-secondary mb-10 text-center">SignIn Now</h1>
 

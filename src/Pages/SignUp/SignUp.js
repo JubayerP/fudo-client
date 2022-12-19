@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 
@@ -17,6 +17,10 @@ const SignUp = () => {
         email: '',
         password: ''
     })
+
+    const location = useLocation()
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -36,6 +40,7 @@ const SignUp = () => {
                         color: '#fff'
                     }
                 })
+                navigate(from, {replace: true})
                 updateUsersProfile(userInfo.name, userInfo.url)
                 .then(result => {
                     // User Updated
@@ -87,8 +92,8 @@ const SignUp = () => {
         }
     }
     return (
-        <div className='container mx-auto my-10 flex justify-around items-center'>
-            <img src={login} className='w-1/3 rounded-2xl' alt="" />
+        <div className='container mx-auto my-10 flex lg:flex-row flex-col lg:space-y-0 space-y-10 justify-around items-center'>
+            <img src={login} className='lg:w-1/3 w-4/5 rounded-2xl' alt="" />
             <div>
                 <h1 className="text-6xl font-bold text-secondary mb-10 text-center">Sign Up Now</h1>
 

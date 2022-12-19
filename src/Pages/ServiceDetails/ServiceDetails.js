@@ -20,15 +20,15 @@ const ServiceDetails = () => {
     },[])
 
     return (
-        <div className='container mx-auto grid grid-cols-3 gap-4 my-20'>
-            <div className='col-span-2'>
-                <img src={img} className='max-w-lg w-full rounded-lg' alt="" />
-                <div className='flex items-center space-x-4 my-5'>
+        <div className='container mx-auto grid lg:grid-cols-3 grid-cols-1 gap-4 my-20'>
+            <div className='lg:col-span-2 mb-10'>
+                <img src={img} className='max-w-lg w-full rounded-lg mx-auto lg:mx-0' alt="" />
+                <div className='flex items-center space-x-4 my-5 lg:px-0 px-16'>
                 <DynamicStar rating={ratings} totalStars={5} emptyStarColor={'#e2e8f0'} width='30' height='30' />
-                <p className='text-xl text-secondary'>({ratings}.0)</p>
+                <p className='text-xl text-secondary'>({ratings})</p>
                 </div>
 
-                <div>
+                <div className='lg:px-0 px-16'>
                     <h1 className="text-5xl font-bold text-secondary">{name}</h1>
                     <p className='text-xl text-gray-400 my-6 text-justify'>{desc}</p>
                     <h4 className='text-2xl font-bold text-primary'>Price ${price}</h4>
@@ -37,7 +37,9 @@ const ServiceDetails = () => {
             { user ?
                 
                 <div className=''>
-                <label htmlFor="my-modal-3" className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Add Your Review</label>
+                    <div className='text-center'>
+                    <label htmlFor="my-modal-3" className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Add Your Review</label>
+                </div>
                 
                 <div className={`${filterReviews.length > 3 ? 'overflow-y-scroll' : 'overflow-hidden'} my-10 space-y-6 h-screen px-2`}>
                     {

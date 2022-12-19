@@ -1,16 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider';
+import Spinner from '../Shared/Spinner/Spinner';
 import MyReview from './MyReview';
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
+        setLoading(true)
         const url = `http://localhost:5000/reviews?email=${user?.email}`;
         fetch(url)
             .then(res => res.json())
-        .then(data => setMyReviews(data))
+            .then(data => {
+                setMyReviews(data)
+                setLoading(false)
+        })
     }, [user?.email])
     
     const handleDelete = id => {
@@ -39,7 +45,9 @@ const MyReviews = () => {
                             No Reviews Were Added.
                         </h2>
                     </>
-                    : <div className="overflow-x-auto my-10 w-11/12 mx-auto">
+                    : 
+                      loading ? <Spinner /> : 
+                    <div className="overflow-x-auto my-10 w-11/12 mx-auto">
                     <table className="table w-full">
                       
                       <thead>

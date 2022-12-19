@@ -21,7 +21,7 @@ const Navbar = () => {
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </label>
-      <ul tabIndex={0} className="menu text-secondary menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+      <ul tabIndex={0} className="menu space-y-2 text-secondary menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         {menuItems}
       </ul>
     </div>
@@ -36,7 +36,12 @@ const Navbar = () => {
   </div>
   <div className="navbar-end">
           {user?.uid ? 
-      <button onClick={logOut} className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize">Sign Out</button>
+            <div className='flex items-center space-x-6'>
+              <div className='tooltip tooltip-bottom tooltip-secondary' data-tip={user?.displayName}>
+              <img src={user?.photoURL} alt="" className='w-10 h-10 rounded-full' />
+              </div>
+              <button onClick={logOut} className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize">Sign Out</button>
+            </div>
     : <Link to='/signup'>
         <button className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize">Sign Up</button>
     </Link>}
