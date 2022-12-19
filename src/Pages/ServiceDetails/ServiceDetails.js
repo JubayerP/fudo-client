@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DynamicStar } from 'react-dynamic-star';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import Modal from '../Modal/Modal';
 import ServiceReviews from './ServiceReviews';
 
 const ServiceDetails = () => {
+    useTitle('Service Details')
     const { user } = useContext(AuthContext);
     const service = useLoaderData();
     const { name, price, _id, img, desc, ratings } = service;

@@ -3,9 +3,12 @@ import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/useTitle';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const SignUp = () => {
-    const { createUser, updateUsersProfile } = useContext(AuthContext);
+    const { createUser, updateUsersProfile, loading, setLoading } = useContext(AuthContext);
+    useTitle('Sign Up')
 
     const [userInfo, setUserInfo] = useState({
         name: '',
@@ -48,7 +51,8 @@ const SignUp = () => {
                 .catch(e => console.log(e))
             })
             .catch(e => {
-            console.log(e);
+                toast.error(e.message);
+                setLoading(false);
         })
     }
 
@@ -91,6 +95,13 @@ const SignUp = () => {
             setUserInfo({ ...userInfo, password: e.target.value })
         }
     }
+
+
+    if (loading) {
+        return <Spinner />
+    }
+
+
     return (
         <div className='container mx-auto my-10 flex lg:flex-row flex-col lg:space-y-0 space-y-10 justify-around items-center'>
             <img src={login} className='lg:w-1/3 w-4/5 rounded-2xl' alt="" />

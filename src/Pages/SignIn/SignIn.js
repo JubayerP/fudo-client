@@ -4,12 +4,16 @@ import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/Login/login2.jpg';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/useTitle';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const SignIn = () => {
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: ''
     });
+    const { loading, setLoading } = useContext(AuthContext);
+    useTitle('Sign In')
 
     const location = useLocation()
     const navigate = useNavigate();
@@ -48,6 +52,7 @@ const SignIn = () => {
                         color: '#fff'
                     }
                 })
+                setLoading(false);
         })
     }
 
@@ -74,6 +79,10 @@ const SignIn = () => {
             })
             navigate(from, {replace: true})
         })
+    }
+
+    if (loading) {
+        return <Spinner />
     }
 
 
