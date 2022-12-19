@@ -6,20 +6,30 @@ import Spinner from '../Shared/Spinner/Spinner';
 import MyReview from './MyReview';
 
 const MyReviews = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
     const [loading, setLoading] = useState(false)
     useTitle('My Reviews')
     useEffect(() => {
         setLoading(true)
+
         const url = `http://localhost:5000/reviews?email=${user?.email}`;
-        fetch(url)
-            .then(res => res.json())
+        fetch(url, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('fudo-token')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut();
+                }
+                return res.json()
+            })
             .then(data => {
                 setMyReviews(data)
                 setLoading(false)
         })
-    }, [user?.email])
+    }, [user?.email, logOut])
     
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure? You want to delete?')
