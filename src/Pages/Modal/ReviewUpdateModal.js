@@ -1,7 +1,12 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { useLoaderData } from 'react-router-dom';
 
-const ReviewUpdateModal = ({id}) => {
+const ReviewUpdateModal = () => {
+
+    const reviewOne = useLoaderData()
+    const {_id, review, title} = reviewOne
+
     const handleUpdate = e => {
         e.preventDefault();
         const form = e.target;
@@ -10,7 +15,7 @@ const ReviewUpdateModal = ({id}) => {
 
         const data = { title, review }
         
-        fetch(`https://food-sense-server.vercel.app/reviews/${id}`, {
+        fetch(`http://localhost:5000/reviews/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -25,22 +30,18 @@ const ReviewUpdateModal = ({id}) => {
         })
     }
     return (
-        <div>
-<input type="checkbox" id="reviewModal" className="modal-toggle" />
-<div className="modal">
-                <form onSubmit={handleUpdate} className="modal-box relative">
-                <label htmlFor="reviewModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+<div className="max-w-md mx-auto mt-20 p-10 shadow rounded-md">
+                <form onSubmit={handleUpdate} className="">
                     <h3 className="text-3xl font-semibold text-secondary text-center mb-4">Update Your Review</h3>
-                    <input type="text" name='title' placeholder="Review Title" className="input w-full max-w-xs focus:outline-none bg-slate-200 text-secondary mb-5 text-sm"/>
-                    <textarea name='review' className="textarea focus:outline-0 bg-slate-200 w-full text-secondary"      placeholder="Review Here"></textarea>
-                <div className="modal-action">
-     <button type='submit'>
-     <label htmlFor='reviewModal' className="btn bg-secondary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Update</label>
-     </button>
-    </div>
-    </form>
+                    <input type="text" name='title' defaultValue={title} placeholder="Review Title" className="input w-full max-w-xs focus:outline-none bg-slate-200 text-secondary mb-5 text-sm"/>
+                    <textarea name='review' defaultValue={review} className="textarea focus:outline-0 bg-slate-200 w-full text-secondary" placeholder="Review Here"></textarea>
+                <div className="mt-2">
+                <button type='submit' className="btn bg-secondary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">
+                    Update
+                </button>
+                </div>
+            </form>
 </div>
-        </div>
     );
 };
 

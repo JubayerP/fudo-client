@@ -51,14 +51,15 @@ const MyReviews = () => {
     return (
         <>
             {
+               
+               loading && myReviews.length === 0 ? <Spinner /> :
                 myReviews.length === 0
                     ? <>
                         <h2 className="text-5xl font-bold text-primary flex justify-center items-center h-[50vh]">
                             No Reviews Were Added.
                         </h2>
                     </>
-                    : 
-                      loading ? <Spinner /> : 
+                    :  
                     <div className="overflow-x-auto my-10 w-11/12 mx-auto">
                     <table className="table w-full">
                       
