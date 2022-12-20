@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DynamicStar } from 'react-dynamic-star';
 import { Link, useLoaderData } from 'react-router-dom';
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 import { AuthContext } from '../../context/AuthProvider';
 import useTitle from '../../hooks/useTitle';
 import Modal from '../Modal/Modal';
 import ServiceReviews from './ServiceReviews';
+
 
 const ServiceDetails = () => {
     useTitle('Service Details')
@@ -47,11 +50,13 @@ const ServiceDetails = () => {
                     <label htmlFor="my-modal-3" className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Add Your Review</label>
                 </div>
                 
-                <div className={`${filterReviews.length > 3 ? 'overflow-y-scroll' : 'overflow-hidden'} my-10 space-y-6 h-screen px-2`}>
+                    <SimpleBar style={{height: '100vh'}} autoHide={false}>
+                    <div className={`${filterReviews.length > 3 ? '' : 'overflow-hidden'} my-10 space-y-6 max-h-screen px-6`}>
                     {
                         filterReviews.map(r => <ServiceReviews key={r._id} r={ r} />)
                     }
                 </div>
+                </SimpleBar>
                 </div>
                     
                 :
