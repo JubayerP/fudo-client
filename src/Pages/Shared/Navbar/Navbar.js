@@ -14,6 +14,7 @@ const Navbar = () => {
         <NavLink to='/myreviews' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>My Reviews</li></NavLink>
         <NavLink to='/addservice' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Add Service</li></NavLink>
       </> : <NavLink to='/signin' className={({ isActive }) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Sign In</li></NavLink>}
+      <NavLink to='/blog' className={({isActive}) => `${isActive ? 'text-primary' : 'hover:text-primary'}`}><li>Blog</li></NavLink>
     </>
     return (
         <div className="navbar no-animation">

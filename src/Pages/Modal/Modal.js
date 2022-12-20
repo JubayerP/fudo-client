@@ -41,8 +41,8 @@ const Modal = ({service}) => {
                 <form onSubmit={handleSubmitReview} className="modal-box relative">
                 <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-3xl font-semibold text-secondary text-center mb-4">Please Review Us.</h3>
-                    <input type="text" name='title' placeholder="Review Title" className="input w-full max-w-xs focus:outline-none bg-slate-200 text-secondary mb-5 text-sm"/>
-                    <textarea name='review' className="textarea focus:outline-0 bg-slate-200 w-full text-secondary"      placeholder="Review Here"></textarea>
+                    <input type="text" name='title' required placeholder="Review Title" className="input w-full max-w-xs focus:outline-none bg-slate-200 text-secondary mb-5 text-sm"/>
+                    <textarea name='review' required className="textarea focus:outline-0 bg-slate-200 w-full text-secondary"      placeholder="Review Here"></textarea>
                 <div className="modal-action">
      <button type='submit'>
      <label htmlFor='my-modal-3' className="btn bg-secondary hover:bg-primary border-0 px-8 rounded-full text-white capitalize no-animation">Add</label>
