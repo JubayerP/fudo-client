@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import { AuthContext } from '../../../context/AuthProvider';
+import { ImEnter, ImExit } from 'react-icons/im'
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -40,10 +41,10 @@ const Navbar = () => {
               <div className='tooltip tooltip-bottom tooltip-secondary' data-tip={user?.displayName}>
               <img src={user?.photoURL} alt="" className='w-10 h-10 rounded-full' />
               </div>
-              <button onClick={logOut} className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize">Sign Out</button>
+              <button onClick={logOut} className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize space-x-2"><span>Sign Out</span> <ImExit size={16}/></button>
             </div>
     : <Link to='/signup'>
-        <button className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize">Sign Up</button>
+        <button className="btn bg-primary hover:bg-primary border-0 px-8 rounded-full text-white capitalize space-x-2"><span>Sign Up</span> <ImEnter size={16}/></button>
     </Link>}
   </div>
 </div>
