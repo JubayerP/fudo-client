@@ -71,6 +71,7 @@ const SignUp = () => {
         if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
             setErrors({...errors, email: 'Please Provide a Valid Email!'})
             setUserInfo({ ...userInfo, email: e.target.value })
+            return;
         } else {
             setErrors({ ...errors, email: '' })
             setUserInfo({ ...userInfo, email: e.target.value })
@@ -81,14 +82,17 @@ const SignUp = () => {
         if (!/(?=.*?[A-Z])/.test(password)) {
             setErrors({ ...errors, password: 'At Least One Upper Case' })
             setUserInfo({ ...userInfo, password: e.target.value })
+            return;
         }
         else if (!/(?=.*?[0-9])/.test(password)) {
             setErrors({ ...errors, password: 'At Least One Digit' })
             setUserInfo({ ...userInfo, password: e.target.value })
+            return
         }
         else if (!/.{8,}/.test(password)) {
             setErrors({...errors, password: 'Minimum eight characters'})
             setUserInfo({ ...userInfo, password: e.target.value })
+            return
         }
         else {
             setErrors({ ...errors, password: '' });
@@ -110,8 +114,8 @@ const SignUp = () => {
 
                 <form onSubmit={handleSubmit} className='w-full'>
                     <div className='max-w-md'>
-                        <input type="text" placeholder="Full Name" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary block" onChange={handleNameChange} value={userInfo.name} />
-                        <input type="text" placeholder="Photo URL" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleUrlChange} value={userInfo.url} />
+                        <input type="text" placeholder="Full Name" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary block" onChange={handleNameChange} value={userInfo.name} required/>
+                        <input type="text" placeholder="Photo URL" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-5 text-secondary" onChange={handleUrlChange} value={userInfo.url} required/>
                         <input type="email" placeholder="Email" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full mb-0 text-secondary" onChange={handleEmailChange} value={userInfo.email} />
                         <p className='text-red-500 mb-5 ml-2'>{errors.email}</p>
                         <input type="password" placeholder="Password" className="input input-bordered max-w-xl w-full focus:outline-none focus:border-primary duration-200 border-gray-400 rounded-full text-secondary" onChange={handlePasswordChange} value={userInfo.password} />

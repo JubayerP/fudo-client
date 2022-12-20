@@ -96,6 +96,7 @@ const SignIn = () => {
             })
             navigate(from, {replace: true})
         })
+        .catch(e => toast.error(e.message))
     }
 
     if (loading) {
@@ -108,7 +109,7 @@ const SignIn = () => {
         <div className='container mx-auto my-10 flex lg:flex-row flex-col justify-around items-center lg:space-y-0 space-y-10'>
             <img src={login} className='lg:w-1/3 object-cover w-4/5 rounded-2xl' alt="" />
             <div>
-                <h1 className="text-6xl font-bold text-secondary mb-10 text-center">SignIn Now</h1>
+                <h1 className="text-6xl font-bold text-secondary mb-10 text-center">Sign In Now</h1>
 
                 <form onSubmit={handleSubmit} className='w-full'>
                     <div>
