@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
             {
                 path: '/reviews/:id',
                 element: <ReviewUpdateModal />,
-                loader: ({ params }) => fetch(`http://localhost:5000/reviews/${params.id}`)
+                loader: ({ params }) => fetch(`https://food-sense-server.vercel.app/reviews/${params.id}`)
             }
         ]
     }
