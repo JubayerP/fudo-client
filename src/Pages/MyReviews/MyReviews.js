@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import swal from 'sweetalert';
 import { AuthContext } from '../../context/AuthProvider';
 import useTitle from '../../hooks/useTitle';
 import Spinner from '../Shared/Spinner/Spinner';
@@ -32,8 +33,18 @@ const MyReviews = () => {
     }, [user?.email, logOut])
     
     const handleDelete = id => {
-        const proceed = window.confirm('Are you sure? You want to delete?')
-        if (proceed) {
+        // const proceed = window.confirm('Are you sure? You want to delete?')
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this review!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                
             fetch(`https://food-sense-server.vercel.app/reviews/${id}`, {
                 method: 'DELETE'
             })
@@ -42,10 +53,14 @@ const MyReviews = () => {
                     if (data.deletedCount > 0) {
                         const remaining = myReviews.filter(rv => rv._id !== id);
                         setMyReviews(remaining)
-                        toast.error('Your Review Has Been Removed!')
+                        toast.error('Your Review Has Been Deleted!')
                     }
                 })        
         }
+             else {
+              toast.success("Your review is safe!");
+            }
+          });
     }
 
     return (

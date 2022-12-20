@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Service = ({ service }) => {
     const { name, price, _id, img, desc, ratings } = service;
     return (
-        <div className='max-w-sm mx-auto rounded-lg shadow-lg'>
+        <div className='w-[384px] mx-auto rounded-lg shadow-lg'>
             <PhotoProvider
                 speed={() => 800}
                 easing={(type) => (type === 2 ? 'cubic-bezier(0.36, 0, 0.66, -0.56)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)')}

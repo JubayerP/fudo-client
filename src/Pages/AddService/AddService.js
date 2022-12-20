@@ -1,9 +1,11 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
 
 const AddService = () => {
     useTitle('Add Service')
+    const navigate = useNavigate();
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
@@ -26,6 +28,7 @@ const AddService = () => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success('You Just Added Your Favorite Food!')
+                    navigate('/services')
                 }
         })
     }

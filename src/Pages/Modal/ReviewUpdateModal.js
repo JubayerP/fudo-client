@@ -1,11 +1,12 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const ReviewUpdateModal = () => {
 
     const reviewOne = useLoaderData()
-    const {_id, review, title} = reviewOne
+    const { _id, review, title } = reviewOne;
+    const navigate = useNavigate()
 
     const handleUpdate = e => {
         e.preventDefault();
@@ -26,11 +27,12 @@ const ReviewUpdateModal = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                 toast('Review Updated!')
-            }
+                }
+                navigate('/myreviews');
         })
     }
     return (
-<div className="max-w-md mx-auto mt-20 p-10 shadow rounded-md">
+<div className="max-w-md mx-auto mt-20 p-10 shadow rounded-md mb-20">
                 <form onSubmit={handleUpdate} className="">
                     <h3 className="text-3xl font-semibold text-secondary text-center mb-4">Update Your Review</h3>
                     <input type="text" name='title' defaultValue={title} placeholder="Review Title" className="input w-full max-w-xs focus:outline-none bg-slate-200 text-secondary mb-5 text-sm"/>
