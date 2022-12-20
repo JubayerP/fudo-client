@@ -51,7 +51,7 @@ const ServiceDetails = () => {
                 </div>
                 
                     <SimpleBar style={{height: '100vh'}} autoHide={false}>
-                    <div className={`${filterReviews.length > 3 ? '' : 'overflow-hidden'} my-10 space-y-6 max-h-screen px-6`}>
+                    <div className={`${filterReviews.length > 3 ? '' : 'overflow-hidden'} my-10 space-y-6 px-6`}>
                     {
                         filterReviews.map(r => <ServiceReviews key={r._id} r={ r} />)
                     }
